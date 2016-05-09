@@ -1,0 +1,18 @@
+{
+  "name": "url-job-queue",
+  "version": "1.0.1",
+  "main": "server/server.js",
+  "license": "",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "cron": "^1.1.0",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.15",
+    "morgan": "^1.7.0",
+    "request": "^2.72.0"
+  },
+  "scripts": {
+    "test": "mocha test",
+    "start": "node ./server/server.js"
+  }
+}
