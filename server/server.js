@@ -3,7 +3,16 @@ var app = express();
 var bodyParser = require('body-parser');
 var handle = require('./request-handler.js');
 var morgan = require('morgan');
-// var util = require('./utility');
+var path = require('path');
+var CronJob = require('cron').CronJob;
+var htmlfetcher = require('../workers/htmlfetcher')
+
+// Schedule workers to run every 5 minutes
+var job = new CronJob('0 */5 * * * *', function(){
+  // console.log('cron job started');
+  htmlfetcher.runWorkers();
+  });
+job.start();
 
 app.all("/*", function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -15,14 +24,15 @@ app.all("/*", function (req, res, next) {
 //Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname + '../public'));
+app.use(express.static(__dirname + '/../public'));
 app.use(morgan('default'));
 
 //Request handlers for all routes in app
 app.get('/', function(req, res) {
-  res.sendFile(path.resolve(__dirname + '../public/index.html'));
+  res.sendFile(path.resolve(__dirname + '/../public/index.html'));
 });
 
+// app.get('/sites', handle.download)
 app.get('/site/:id', handle.retrieveSite);
 app.post('/sites', handle.addSiteToQueue);
 

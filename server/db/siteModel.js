@@ -9,5 +9,4 @@ var siteSchema = mongoose.Schema({
 
 var Site = mongoose.model('Site', siteSchema);
 
-
 module.exports = Site;
