@@ -14,3 +14,11 @@ Ex: User submits www.google.com to your endpoint.  The user gets back a job id. 
 ## Workers
 The node-cron (https://github.com/ncb000gt/node-cron) module is used to schedule the workers. Currently the job is set to run every 5 minutes. The workers read from a text file in which every new line except for the first one has a URL to be fetched and the corresponding jobId for that URL. After the worker is done making a request to the URL and storing its HTML in the Mongo Database, it removes the corresponding lines from the text file.
 
+## Checking job status
+When the client sends a request with a job id as a request parameter, the server does a lookup in the database for the html string for that job. If it's found in the database, the string is written to a file with an .html extension and the server sends a redirect response for the '/html' endpoint
+
+When a get request for the '/html' endpoint is received html file that was just written to is sent to the client to be rendered.
+
+## To Do:
+Currently there are still edge cases that need to be handled. On the front end, form validation needs to be implemented to check that the URL being entered is a valid URL. There also needs to be error handling for when a job id that does not exist is entered in the form. This is something that should be handled both on the front end for UX purposes (the last jobID created can be stored in the state) and also on the backend there should be specific error handling/logging for when a jobId does not exist.
+

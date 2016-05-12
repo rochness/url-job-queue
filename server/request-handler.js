@@ -1,9 +1,9 @@
 var fs = require('fs');
 var util = require('./helpers/utility');
-var db = require('./db/database');
 var Site = require('./db/siteModel');
 var path = require('path');
 
+var htmlPath = path.join(__dirname, './helpers/requestedHtml.html');
 var queuePath = path.join(__dirname, '../workers/jobQueue.txt');
 
 exports.addSiteToQueue = function(req, res) {
@@ -43,8 +43,14 @@ exports.retrieveSite = function(req, res) {
       } else if(site === null) {
           res.status(500).send('pending');
         } else {
-          res.status(200).send(site.html);
+          fs.writeFile(htmlPath, site.html, function(error) {
+            if(error) {
+              console.log('error writing html to file');
+              res.status(500).send(error);
+            } else {
+              res.redirect('/html');
+            }
+          })
         }
     })
 };
-

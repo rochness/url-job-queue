@@ -1,7 +1,6 @@
 var fs = require('fs');
 var _ = require('underscore');
 var request = require('request');
-var db = require('../db/database');
 var Site = require('../db/siteModel');
 var path = require('path');
 
@@ -61,8 +60,6 @@ var saveUrlToDb = function(jobId, url, html) {
     if (err) {
       console.log('error adding/saving site');
       return;
-    } else {
-      console.log('added site');
     }
   });
 }
