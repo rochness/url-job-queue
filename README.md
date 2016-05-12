@@ -20,5 +20,5 @@ When the client sends a request with a job id as a request parameter, the server
 When a get request for the '/html' endpoint is received html file that was just written to is sent to the client to be rendered.
 
 ## To Do:
-Currently there are still edge cases that need to be handled. On the front end, form validation needs to be implemented to check that the URL being entered is a valid URL. There also needs to be error handling for when a job id that does not exist is entered in the form. This is something that should be handled both on the front end for UX purposes (the last jobID created can be stored in the state) and also on the backend there should be specific error handling/logging for when a jobId does not exist.
+Currently there are still edge cases that need to be handled. On the front end, form validation needs to be implemented to check that the URL being entered is a valid URL. There also needs to be error handling for when a job id that does not exist is entered in the form. This is something that should be handled both on the front end for UX purposes (the last jobID created can be stored in the state) and also on the backend there should be specific error handling/logging for when a jobId does not exist. Additionally, the state of the app does not persist after a new route is navigated to.
 
